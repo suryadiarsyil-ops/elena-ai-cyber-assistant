@@ -480,9 +480,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-**Project Maintainer**: [Your Name]
+**Project Maintainer**: [suryadi]
 - GitHub: [@suryadiarsyil-ops](https://github.com/suryadiarsyil-ops)
-- Email: your.email@example.com
+
 
 ---
 

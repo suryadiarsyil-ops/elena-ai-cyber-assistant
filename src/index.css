@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-zinc-950 text-zinc-200 antialiased;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-zinc-950;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-800 rounded;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-700;
+  }
+}
+
+@layer components {
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .terminal-glow {
+    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+  }
+
+  .message-glow {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
+  }
+
+  /* Scanline Effect */
+  .scanline {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0, 0, 0, 0.25) 51%
+    );
+    background-size: 100% 4px;
+    animation: scanline 8s linear infinite;
+    pointer-events: none;
+    z-index: 30;
+    opacity: 0.5;
+  }
+
+  @keyframes scanline {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  /* Message Content Styling */
+  .message-content {
+    @apply text-zinc-100;
+  }
+
+  .message-content p {
+    @apply mb-3 last:mb-0;
+  }
+
+  .message-content strong {
+    @apply text-cyan-300 font-bold;
+  }
+
+  .message-content em {
+    @apply text-zinc-300 italic;
+  }
+
+  .message-content code {
+    @apply bg-zinc-950 px-1.5 py-0.5 rounded text-cyan-400 text-xs border border-zinc-800;
+  }
+
+  .message-content pre {
+    @apply bg-zinc-950 p-4 rounded border border-zinc-800 overflow-x-auto mb-3 text-xs;
+  }
+
+  .message-content pre code {
+    @apply bg-transparent border-none p-0 text-zinc-300;
+  }
+
+  .message-content a {
+    @apply text-cyan-400 hover:text-cyan-300 underline transition-colors;
+  }
+
+  .message-content ul,
+  .message-content ol {
+    @apply ml-6 mb-3 space-y-1;
+  }
+
+  .message-content ul {
+    @apply list-disc;
+  }
+
+  .message-content ol {
+    @apply list-decimal;
+  }
+
+  .message-content li {
+    @apply text-zinc-200;
+  }
+
+  .message-content blockquote {
+    @apply border-l-4 border-cyan-500 pl-4 italic text-zinc-400 my-3;
+  }
+
+  .message-content h1,
+  .message-content h2,
+  .message-content h3,
+  .message-content h4 {
+    @apply font-bold text-cyan-400 mb-2 mt-4;
+  }
+
+  .message-content h1 {
+    @apply text-xl;
+  }
+
+  .message-content h2 {
+    @apply text-lg;
+  }
+
+  .message-content h3 {
+    @apply text-base;
+  }
+
+  .message-content table {
+    @apply w-full border-collapse mb-3;
+  }
+
+  .message-content th,
+  .message-content td {
+    @apply border border-zinc-800 px-3 py-2 text-left;
+  }
+
+  .message-content th {
+    @apply bg-zinc-900 font-bold text-cyan-400;
+  }
+
+  .message-content td {
+    @apply bg-zinc-950;
+  }
+
+  /* Code Block Styling */
+  .code-block-wrapper {
+    @apply my-3 rounded-lg overflow-hidden border border-zinc-800 bg-zinc-950;
+  }
+
+  .code-block-header {
+    @apply flex items-center justify-between px-4 py-2 bg-zinc-900 border-b border-zinc-800;
+  }
+
+  .code-language {
+    @apply text-xs text-cyan-400 uppercase font-bold tracking-wider;
+  }
+
+  .copy-code-btn {
+    @apply flex items-center gap-2 text-xs text-zinc-400 hover:text-cyan-400 transition-colors px-2 py-1 rounded hover:bg-zinc-800;
+  }
+
+  .copy-icon,
+  .check-icon {
+    @apply w-4 h-4;
+  }
+
+  /* Markdown Table Wrapper */
+  .markdown-table-wrapper {
+    @apply overflow-x-auto my-3;
+  }
+
+  /* Custom Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  /* Pulse Animation for Status Indicators */
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 8px rgba(6, 182, 212, 0.8);
+    }
+    50% {
+      opacity: 0.5;
+      box-shadow: 0 0 16px rgba(6, 182, 212, 0.6);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Typing Indicator */
+  @keyframes typing {
+    0% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+
+  .typing-dot {
+    animation: typing 1.4s infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent;
+  }
+
+  /* Glass Morphism */
+  .glass {
+    @apply bg-zinc-900/30 backdrop-blur-md border border-zinc-800/50;
+  }
+
+  /* Custom Input Range Styling */
+  input[type='range'] {
+    @apply w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    @apply appearance-none w-4 h-4 rounded-full bg-cyan-500 cursor-pointer;
+  }
+
+  input[type='range']::-moz-range-thumb {
+    @apply w-4 h-4 rounded-full bg-cyan-500 cursor-pointer border-0;
+  }
+
+  input[type='range']::-webkit-slider-thumb:hover {
+    @apply bg-cyan-400;
+  }
+
+  input[type='range']::-moz-range-thumb:hover {
+    @apply bg-cyan-400;
+  }
+
+  /* Smooth Transitions */
+  * {
+    @apply transition-colors duration-200;
+  }
+
+  /* Focus Styles */
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-cyan-500 ring-offset-2 ring-offset-zinc-950;
+  }
+
+  /* Disabled State */
+  button:disabled,
+  input:disabled,
+  textarea:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-cyan-500/30 text-cyan-100;
+  }
+
+  /* Loading Spinner */
+  .spinner {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* Responsive Design Utilities */
+@media (max-width: 768px) {
+  .message-content {
+    @apply text-sm;
+  }
+
+  .code-block-wrapper {
+    @apply text-xs;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .scanline,
+  aside,
+  header,
+  .input-area {
+    @apply hidden;
+  }
+
+  .message-content {
+    @apply text-black;
+  }
+}
